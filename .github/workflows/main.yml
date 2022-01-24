@@ -47,7 +47,7 @@ jobs:
 
           install: |
             apt-get update -y
-            apt-get install -y git libsqlite3-dev libreadline6-dev libgpg-error-dev libgnutls28-dev libxslt-dev libssl-dev libmariadb-dev-compat unzip libtool automake libgcrypt20-dev wget
+            apt-get install -y git libsqlite3-dev libreadline6-dev libgpg-error-dev libgnutls28-dev libxslt-dev libssl-dev libmariadb-dev-compat unzip libtool automake libgcrypt20-dev wget build-essentials gcc
 
           run: |
             cd $GITHUB_WORKSPACE
