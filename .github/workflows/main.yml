@@ -27,6 +27,13 @@ jobs:
       - name: "Build"
         run: |
             cd $GITHUB_WORKSPACE
+            cd ..
+            wget https://github.com/Homegear/libhomegear-base/archive/master.zip
+            unzip master.zip
+            rm master.zip
+            cd libhomegear-base-master
+            ./makeRelease.sh
+            cd $GITHUB_WORKSPACE
             ./makeRelease.sh
 
   armv7_job:
@@ -35,7 +42,7 @@ jobs:
     name: Build on ubuntu-18.04 armv7
     steps:
       - uses: actions/checkout@v2.1.0
-      - uses: uraimo/run-on-arch-action@v2
+      - uses: uraimo/run-on-arch-action@v2.1.1
         name: Run commands
         id: runcmd
         with:
@@ -47,5 +54,12 @@ jobs:
           githubToken: ${{ github.token }}
 
           run: |
+            cd $GITHUB_WORKSPACE
+            cd ..
+            wget https://github.com/Homegear/libhomegear-base/archive/master.zip
+            unzip master.zip
+            rm master.zip
+            cd libhomegear-base-master
+            ./makeRelease.sh
             cd $GITHUB_WORKSPACE
             ./makeRelease.sh
