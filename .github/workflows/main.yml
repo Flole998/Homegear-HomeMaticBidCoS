@@ -25,9 +25,13 @@ jobs:
       matrix:
         include:
           - arch: aarch64
-            distro: bullseye buster
+            distro: bullseye
           - arch: armv7
-            distro: bullseye buster
+            distro: bullseye
+          - arch: aarch64
+            distro: buster
+          - arch: armv7
+            distro: buster
     
     steps:
       - uses: actions/checkout@v2.1.0
