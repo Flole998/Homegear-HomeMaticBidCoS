@@ -21,61 +21,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      - name: "Build"
+      - name: "Install qemu"
         run: |
             sudo apt-get update
-            sudo apt-get install libsqlite3-dev libreadline6-dev libgpg-error-dev libgnutls28-dev libxslt-dev libssl-dev libmysqlclient-dev unzip libtool automake libgcrypt20-dev
-            cd $GITHUB_WORKSPACE
-            cd ..
-            wget https://github.com/Homegear/libhomegear-base/archive/master.zip
-            unzip master.zip
-            rm master.zip
-            cd libhomegear-base-master
-            ./makeRelease.sh
-            cd $GITHUB_WORKSPACE
-            ./makeRelease.sh
+            sudo apt-get install qemu qemu-user-static
+      - uses: docker://homegear/build:debian-bullseye-arm64
 
-  armv7_job:
-    # The host should always be Linux
-    runs-on: bullseye
-    name: Build on ${{ matrix.distro }} ${{ matrix.arch }}
-    
-        # Run steps on a matrix of 3 arch/distro combinations
-    strategy:
-      matrix:
-        include:
-          - arch: aarch64
-            distro: bullseye
-          - arch: armv7
-            distro: bullseye
-    
-    steps:
-      - uses: actions/checkout@v2.1.0
-      - uses: uraimo/run-on-arch-action@v2.1.1
-        name: Run commands
-        id: runcmd
-        with:
-          arch: ${{ matrix.arch }}
-          distro: ${{ matrix.distro }}
-
-          # Not required, but speeds up builds by storing container images in
-          # a GitHub package registry.
-          githubToken: ${{ github.token }}
-
-          install: |
-            apt-get update -y
-            apt-get install -y git libsqlite3-dev libreadline6-dev libgpg-error-dev libgnutls28-dev libxslt-dev libssl-dev libmysqlclient-dev unzip libtool automake libgcrypt20-dev
-
-          run: |
-            cd $GITHUB_WORKSPACE
-            cd ..
-            wget https://github.com/Homegear/libhomegear-base/archive/master.zip
-            unzip master.zip
-            rm master.zip
-            cd libhomegear-base-master
-            ./makeRelease.sh
-            cd $GITHUB_WORKSPACE
-            ./makeRelease.sh
