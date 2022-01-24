@@ -26,4 +26,6 @@ jobs:
             sudo apt-get update
             sudo apt-get install qemu qemu-user-static
       - uses: docker://homegear/build:debian-bullseye-arm64
+        with:
+          entrypoint: /build/CreateDebianPackageNightly.sh
 
