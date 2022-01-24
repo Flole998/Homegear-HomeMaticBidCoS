@@ -28,10 +28,6 @@ jobs:
             distro: bullseye
           - arch: armv7
             distro: bullseye
-          - arch: aarch64
-            distro: buster
-          - arch: armv7
-            distro: buster
     
     steps:
       - uses: actions/checkout@v2.1.0
