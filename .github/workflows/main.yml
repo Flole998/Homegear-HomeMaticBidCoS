@@ -26,6 +26,7 @@ jobs:
 
       - name: "Build"
         run: |
+            sudo apt-get update
             sudo apt-get install libsqlite3-dev libreadline6-dev libgpg-error-dev libgnutls28-dev libxslt-dev libssl-dev libmysqlclient-dev unzip libtool automake libgcrypt20-dev
             cd $GITHUB_WORKSPACE
             cd ..
@@ -55,6 +56,7 @@ jobs:
           githubToken: ${{ github.token }}
 
           install: |
+            apt-get update
             apt-get install libsqlite3-dev libreadline6-dev libgpg-error-dev libgnutls28-dev libxslt-dev libssl-dev libmysqlclient-dev unzip libtool automake libgcrypt20-dev
 
           run: |
